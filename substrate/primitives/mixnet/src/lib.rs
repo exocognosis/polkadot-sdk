@@ -22,5 +22,12 @@
 
 extern crate alloc;
 
+pub mod crypto_suite;
 pub mod runtime_api;
 pub mod types;
+
+pub use crypto_suite::{
+	ActiveSuite, CryptoSuiteId, PacketGeometry, PacketVersion, ScheduledSuiteActivation,
+	VersionedAuthorityId, VersionedAuthoritySignature, VersionedKemPublicKey,
+	VersionedPeerIdentity,
+};
