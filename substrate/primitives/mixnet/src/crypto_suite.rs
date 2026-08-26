@@ -160,6 +160,17 @@ pub enum VersionedKemPublicKey {
 	V3MlKem768([u8; ML_KEM_768_PUBLIC_KEY_SIZE]),
 }
 
+impl VersionedKemPublicKey {
+	/// Return the suite that requires this key form.
+	pub const fn suite_id(&self) -> CryptoSuiteId {
+		match self {
+			Self::V1X25519(_) => V1_CLASSICAL,
+			Self::V2Hybrid { .. } => V2_HYBRID_CAT3,
+			Self::V3MlKem768(_) => V3_PQ_CAT3,
+		}
+	}
+}
+
 /// Canonical peer identity with an algorithm tag.
 #[derive(Clone, Decode, Encode, TypeInfo, PartialEq, Eq)]
 pub enum VersionedPeerIdentity {
@@ -174,6 +185,17 @@ pub enum VersionedPeerIdentity {
 	},
 	/// V3 ML-DSA-65 identity.
 	V3MlDsa65([u8; ML_DSA_65_PUBLIC_KEY_SIZE]),
+}
+
+impl VersionedPeerIdentity {
+	/// Return the suite that requires this identity form.
+	pub const fn suite_id(&self) -> CryptoSuiteId {
+		match self {
+			Self::V1Ed25519(_) => V1_CLASSICAL,
+			Self::V2Hybrid { .. } => V2_HYBRID_CAT3,
+			Self::V3MlDsa65(_) => V3_PQ_CAT3,
+		}
+	}
 }
 
 /// Canonical authority identifier with an algorithm tag.

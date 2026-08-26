@@ -23,6 +23,7 @@
 extern crate alloc;
 
 pub mod crypto_suite;
+pub mod registration;
 pub mod runtime_api;
 pub mod types;
 
@@ -30,4 +31,8 @@ pub use crypto_suite::{
 	ActiveSuite, CryptoSuiteId, PacketGeometry, PacketVersion, ScheduledSuiteActivation,
 	VersionedAuthorityId, VersionedAuthoritySignature, VersionedKemPublicKey,
 	VersionedPeerIdentity,
+};
+pub use registration::{
+	RegistrationPayloadError, VersionedMixnode, VersionedRegistrationPayload,
+	MAX_EXTERNAL_ADDRESSES, MAX_EXTERNAL_ADDRESSES_TOTAL_SIZE, MAX_EXTERNAL_ADDRESS_SIZE,
 };
